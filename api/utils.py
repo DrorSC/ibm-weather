@@ -1,4 +1,3 @@
-
 class Utils:
 
     def calculate_lowest_temp_city(self, cities_data):
@@ -21,3 +20,7 @@ class Utils:
 
         # Add city name to return "main" object
         return {**coldest_city_main, "city_name": coldest_city["name"]}
+
+
+    def create_city_list(self, cities_string):
+        return cities_string.split(',')

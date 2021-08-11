@@ -1,11 +1,14 @@
 import flask
-
+from flask import request
+from utils import Utils
 from api import Weather
+
+utils = Utils()
+weather_api = Weather()
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 
-weather_api = Weather()
 
 @app.route('/', methods=['GET'])
 def home():
@@ -13,7 +16,11 @@ def home():
 
 @app.route('/lowest-temp-city', methods=['GET'])
 def get_lowest_temp():
-    cities_array = ["tel aviv", "berlin", "budapest"] # hard-coded cities
+    # Get cities string from http request parameters
+    cities_string = request.args.get('cities')
+    # Convers cities string to a list
+    cities_array = utils.create_city_list(cities_string)
+    # Return the lowest temp value
     return weather_api.lowest_temp(cities_array)
 
 app.run()
