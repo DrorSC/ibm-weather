@@ -13,6 +13,7 @@ def home():
 
 @app.route('/lowest-temp-city', methods=['GET'])
 def get_lowest_temp():
-    return weather_api.lowest_temp()
+    cities_array = ["tel aviv", "berlin", "budapest"] # hard-coded cities
+    return weather_api.lowest_temp(cities_array)
 
 app.run()
