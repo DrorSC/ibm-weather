@@ -1,10 +1,10 @@
 import requests
 import json
-from flask import jsonify
 from utils import Utils
 
 utils = Utils()
 
+# TODO: move to env file
 API_URL = "https://api.openweathermap.org/data/2.5/"
 API_KEY = "a8b3076d14ffcf7303882663a4d59cb0"
 
@@ -14,8 +14,6 @@ def get_forcast_by_city(city_name):
 class Weather:
 
     def lowest_temp(self, cities_array):
-        print(cities_array)
-
         cities_data_to_compare = []
         
         # retrieve cities data and put data inside array
@@ -26,7 +24,7 @@ class Weather:
                 if data["cod"] == "200":
                     cities_data_to_compare.append(data)
             else:
-                print("bad")
+                print(f"Failed to retrieve data for city {city.name}")
         
         if not cities_data_to_compare:
             raise ValueError("No cities found")

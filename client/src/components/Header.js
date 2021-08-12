@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Switch from '@material-ui/core/Switch';
 
 const Header = ({ celsiusMode, toggle }) => {

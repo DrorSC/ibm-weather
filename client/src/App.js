@@ -23,7 +23,7 @@ function App() {
       setColdestCity(defaultColdestCity)
     }
     getDefaultColdestCity()
-  }, [])
+  }, [cities])
 
   // Fetch ColdestCity
   const fetchColdestCity = async (citiesString) => {
