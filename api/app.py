@@ -35,5 +35,5 @@ def get_lowest_temp():
     except Exception as e:
         return f"Error in weather_api.lowest_temp: {e}"
 
-
-app.run()
+if __name__ == "__main__":
+    app.run()
