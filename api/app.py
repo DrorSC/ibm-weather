@@ -14,6 +14,7 @@ app.config["DEBUG"] = True
 def home():
     return "<h1>Home</h1>"
 
+
 @app.route('/lowest-temp-city', methods=['GET'])
 def get_lowest_temp():
     # Get cities string from http request parameters
@@ -23,4 +24,8 @@ def get_lowest_temp():
     # Return the lowest temp value
     return weather_api.lowest_temp(cities_array)
 
+
 app.run()
+
+# if __name__ == '__main__':
+# app.run(debug=True, host='0.0.0.0')
