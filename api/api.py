@@ -28,7 +28,8 @@ class Weather:
             else:
                 print("bad")
         
-        # print(cities_to_compare)
+        if not cities_data_to_compare:
+            raise ValueError("No cities found")
 
         lowest_temp_city = utils.calculate_lowest_temp_city(cities_data_to_compare)
 

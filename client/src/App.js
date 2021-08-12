@@ -4,6 +4,7 @@ import Footer from './components/Footer';
 import Header from './components/Header';
 import ClockLoader from "react-spinners/ClockLoader";
 import Card from './components/Card';
+import Search from './components/Search';
 
 const API_URL = "http://localhost:5000/";
 const DEFAULT_CITIES = 'tel aviv,berlin,budapest';
@@ -12,58 +13,58 @@ function App() {
   const [loading, setLoading] = useState(false)
   const [cities, setCities] = useState(DEFAULT_CITIES)
   const [coldestCity, setColdestCity] = useState(null)
+  const [celsiusMode, setCelsiusMode] = useState(false)
 
   useEffect(() => {
     const getDefaultColdestCity = async () => {
-      setLoading(true)
-      const defaultColdestCity = await fetchColdestCity()
+      const defaultColdestCity = await fetchColdestCity(cities)
       setColdestCity(defaultColdestCity)
-      setLoading(false)
     }
-
     getDefaultColdestCity()
   }, [])
 
   // Fetch ColdestCity
-  const fetchColdestCity = async () => {
-    const res = await fetch(`${API_URL}lowest-temp-city?cities=${DEFAULT_CITIES}`)
+  const fetchColdestCity = async (citiesString) => {
+    setLoading(true)
+    const res = await fetch(`${API_URL}lowest-temp-city?cities=${citiesString}`)
+    // const res = await fetch(`${process.env.API_URL}lowest-temp-city?cities=${citiesString}`)
+    setLoading(false)
     const data = await res.json()
-
     return data
   }
 
-  const onSubmit = () => {
-
+  const onSubmit = async (e) => {
+    e.preventDefault()
+    const coldestCity = await fetchColdestCity(cities)
+    setColdestCity(coldestCity)
   }
 
+  const toggleCelsiusMode = () =>{
+    setCelsiusMode(!celsiusMode)
+  }
+
+
+  console.log(celsiusMode)
   return (
     <div className="App">
-      <Header />
-
+      <Header celsiusMode={celsiusMode} toggle={toggleCelsiusMode} />
       <div style={{ height: '100%' }}>
-        <form onSubmit={onSubmit}>
-          <div style={{ border: '1px solid pink', padding: 10, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-            <label>Cities to check: </label>
-            <input type='text' placeholder='City,City,City...' value={cities}
-              onChange={(e) => setCities(e.target.value)} />
-            <input type='submit' className='btn' value='Find The Coldest' style={{ width: 100, whiteSpace: 'normal' }} />
-          </div>
-        </form>
-
-        <div style={{ border: '1px solid blue', padding: 30 }}>
-          {coldestCity ?
-            <div style={{ display: 'flex', justifyContent: 'space-around' }}>
-              <Card coldestCity={coldestCity} />
-            </div>
+        <Search onSubmit={onSubmit} onChange={setCities} value={cities} />
+        <div style={{ padding: 30 }}>
+          {coldestCity && !loading ?
+            <Card coldestCity={coldestCity} celsiusMode={celsiusMode} />
             :
             <ClockLoader loading={loading} size={100} css={'display: inline-block'} color={'rgb(54, 215, 183)'} />
           }
         </div>
       </div>
-
       <Footer />
     </div>
   );
+}
+
+const styles = {
+
 }
 
 export default App;

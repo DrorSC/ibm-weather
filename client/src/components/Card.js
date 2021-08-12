@@ -1,20 +1,23 @@
 import React from 'react'
+import { KelvinToCelsius } from '../Utils'
 
-const Card = ({ coldestCity }) => {
+const Card = ({ coldestCity, celsiusMode }) => {
     const { city_name, feels_like, grnd_level, humidity, pressure, sea_level, temp, temp_kf, temp_max, temp_min } = coldestCity
+    const tempUnit = celsiusMode ? '\u00b0C' : 'K'
+    console.log('card ' + celsiusMode)
     return (
-        <div style={{ maxWidth: 500, border: '1px solid red', padding: 20 }}>
+        <div style={{ maxWidth: 500, padding: 20 }}>
             <h2>{city_name}</h2>
-            <h1 style={{ marginTop: 10 }}>{temp}&deg;F</h1>
+            <h1 style={{ marginTop: 10 }}>{celsiusMode ? KelvinToCelsius(temp).toFixed(0) : temp.toFixed(0)}{tempUnit}</h1>
             <div style={{ marginTop: 10 }}>
-                <SubInfo label={'Feels Like'} value={feels_like} unit={'\u00b0F'} />
+                <SubInfo label={'Feels Like'} value={feels_like} unit={tempUnit} />
                 <SubInfo label={'Humidity'} value={humidity} unit={'%'} />
                 <SubInfo label={'Pressure'} value={pressure} unit={'mb'} />
                 <SubInfo label={'Ground Level'} value={grnd_level} unit={'m'} />
                 <SubInfo label={'Sea Level'} value={sea_level} unit={'m'} />
-                <SubInfo label={'Tempature KF'} value={temp_kf} unit={'\u00b0F'} />
-                <SubInfo label={'Tempature Max'} value={temp_max} unit={'\u00b0F'} />
-                <SubInfo label={'Tempature Min'} value={temp_min} unit={'\u00b0F'} />
+                <SubInfo label={'Tempature KF'} value={celsiusMode ? KelvinToCelsius(temp_kf).toFixed(0) : temp_kf.toFixed(0)} unit={tempUnit} />
+                <SubInfo label={'Tempature Max'} value={celsiusMode ? KelvinToCelsius(temp_max).toFixed(0) : temp_max.toFixed(0)} unit={tempUnit} />
+                <SubInfo label={'Tempature Min'} value={celsiusMode ? KelvinToCelsius(temp_min).toFixed(0) : temp_min.toFixed(0)} unit={tempUnit} />
             </div>
         </div>
     )
