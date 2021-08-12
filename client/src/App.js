@@ -6,6 +6,8 @@ import ClockLoader from "react-spinners/ClockLoader";
 import Card from './components/Card';
 import Search from './components/Search';
 
+import Background from './assets/cold-weather.jpeg';
+
 const API_URL = "http://localhost:5000/";
 const DEFAULT_CITIES = 'tel aviv,berlin,budapest';
 
@@ -39,16 +41,14 @@ function App() {
     setColdestCity(coldestCity)
   }
 
-  const toggleCelsiusMode = () =>{
+  const toggleCelsiusMode = () => {
     setCelsiusMode(!celsiusMode)
   }
 
-
-  console.log(celsiusMode)
   return (
-    <div className="App">
+    <div className="App" style={styles.appContainer}>
       <Header celsiusMode={celsiusMode} toggle={toggleCelsiusMode} />
-      <div style={{ height: '100%' }}>
+      <div style={styles.mainContent}>
         <Search onSubmit={onSubmit} onChange={setCities} value={cities} />
         <div style={{ padding: 30 }}>
           {coldestCity && !loading ?
@@ -64,7 +64,18 @@ function App() {
 }
 
 const styles = {
-
+  appContainer: {
+    background: `url(${Background})`,
+    height: '100%',
+    width: '100%',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
+    backgroundFilter: 'blur(2px)'
+  },
+  mainContent: {
+    height: '100%',
+  }
 }
 
 export default App;
