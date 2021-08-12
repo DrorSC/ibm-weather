@@ -2,16 +2,19 @@ import flask
 from flask import request
 from utils import Utils
 from api import Weather
+from flask_cors import CORS, cross_origin
 
 utils = Utils()
 weather_api = Weather()
 
 app = flask.Flask(__name__)
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 app.config["DEBUG"] = True
 
 @app.route('/', methods=['GET'])
 def home():
-    return "<h1>Home</h1>"
+    return "<h1>Hi :)</h1>"
 
 @app.route('/lowest-temp-city', methods=['GET'])
 def get_lowest_temp():

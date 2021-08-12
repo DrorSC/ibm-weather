@@ -71,7 +71,6 @@ const styles = {
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
-    backgroundFilter: 'blur(2px)'
   },
   mainContent: {
     height: '100%',
