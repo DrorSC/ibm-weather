@@ -19,11 +19,11 @@ function App() {
 
   useEffect(() => {
     const getDefaultColdestCity = async () => {
-      const defaultColdestCity = await fetchColdestCity(cities)
+      const defaultColdestCity = await fetchColdestCity(DEFAULT_CITIES)
       setColdestCity(defaultColdestCity)
     }
     getDefaultColdestCity()
-  }, [cities])
+  }, [])
 
   // Fetch ColdestCity
   const fetchColdestCity = async (citiesString) => {

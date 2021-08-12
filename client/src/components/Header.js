@@ -1,5 +1,5 @@
 import React from 'react'
-import Switch from '@material-ui/core/Switch';
+// import Switch from '@material-ui/core/Switch';
 
 const Header = ({ celsiusMode, toggle }) => {
 
@@ -8,10 +8,11 @@ const Header = ({ celsiusMode, toggle }) => {
             <h1>IBM Coldest Weather App</h1>
             <div style={styles.celSwitch}>
                 <span>Celcius Mode:</span>
-                <Switch
+                {/* <Switch
                     checked={celsiusMode}
                     onChange={toggle}
-                />
+                /> */}
+                <input type='checkbox' checked={celsiusMode} onChange={toggle} />
                 {/* <span>{'\u00b0F'}F</span>
                 <span>{'\u00b0F'}C</span> */}
             </div>

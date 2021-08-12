@@ -1,4 +1,3 @@
-import { Container } from '@material-ui/core'
 import React from 'react'
 import { KelvinToCelsius } from '../Utils'
 
@@ -6,7 +5,7 @@ const Card = ({ coldestCity, celsiusMode }) => {
     const { city_name, feels_like, grnd_level, humidity, pressure, sea_level, temp, temp_kf, temp_max, temp_min } = coldestCity
     const tempUnit = celsiusMode ? '\u00b0C' : 'K'
     return (
-        <Container maxWidth="sm" style={styles.cardContainer}>
+        <div style={styles.cardContainer}>
             <div>
                 <h2>{city_name}</h2>
                 <h1 style={{ marginTop: 10 }}>{celsiusMode ? KelvinToCelsius(temp).toFixed(0) : temp.toFixed(0)}{tempUnit}</h1>
@@ -23,7 +22,7 @@ const Card = ({ coldestCity, celsiusMode }) => {
                     <SubInfo label={'Tempature Min'} value={celsiusMode ? KelvinToCelsius(temp_min).toFixed(0) : temp_min.toFixed(0)} unit={tempUnit} />
                 </div>
             </div>
-        </Container>
+        </div>
     )
 }
 
@@ -38,6 +37,7 @@ const SubInfo = ({ label, value, unit }) => {
 
 const styles = {
     cardContainer: {
+        maxWidth: 500,
         padding: 20,
         boxShadow: 'rgba(0, 0, 0, 0.35) 0px 5px 15px'
     }

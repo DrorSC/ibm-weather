@@ -1,15 +1,18 @@
-import { Button, TextField } from '@material-ui/core'
 import React from 'react'
 
 const Search = ({ onSubmit, onChange, value }) => {
     return (
         <form onSubmit={onSubmit}>
             <div style={styles.searchContainer}>
-                <TextField label="city,city,city..." value={value} style={{minWidth: 300}}
+                {/* <TextField label="city,city,city..." value={value} style={{minWidth: 300}}
                     onChange={(e) => onChange(e.target.value)} />
                 <Button variant="contained" color="primary" type="submit">
                     Apply
-                </Button>
+                </Button> */}
+                <label>Cities to check: </label>
+                <input type='text' placeholder='City,City,City...' value={value}
+                    onChange={(e) => onChange(e.target.value)} />
+                <input type='submit' className='btn' value='Apply' style={styles.button} />
             </div>
         </form>
     )
