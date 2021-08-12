@@ -1,6 +1,8 @@
 Hi, welcome to Trusteer find the coldest weather city site!
 
-Run "docker-compose up" from the root folder
+Run "docker-compose build" from the root folder
+
+After finished, Run "docker-compose up" from the same folder
 
 Wait for the docker to set up
 
